@@ -1,0 +1,24 @@
+quickexec EXECUTABLE "..\quickexec\quickexec.exe"
+
+titaniumorig EXECUTABLE "executables\titaniumorig.exe"
+//titaniummercs EXECUTABLE "executables\mercorig.exe"
+//rtitaniummercsanet2 EXECUTABLE "executables\mercanet2.dll"
+
+P1 PATCHSET "games\Win95OriginalSWv1.0.ini"
+P2 PATCHSET "games\Win95OriginalSWv1.1.ini"
+P3 PATCHSET "games\Win95OriginalSWv1.1XP.ini"
+P4 PATCHSET "games\TitaniumOriginalHW.ini"
+P5 PATCHSET "games\TitaniumOriginalSW.ini"
+P6 PATCHSET "games\TitaniumMercsHW.ini"
+P7 PATCHSET "games\TitaniumMercsSW.ini"
+P8 PATCHSET "games\TitaniumGBLHW.ini"
+P9 PATCHSET "games\TitaniumGBLSW.ini"
+
+Filename95O HUNK "hunks\Filename95O.ini"
+TrialCrash95O HUNK "hunks\TrialCrash95O.ini"
+Resolution95O HUNK "hunks\Resolution95O.ini"
+StartupCrash95O HUNK "hunks\StartupCrash95O.ini"
+StartupCrashTHWO HUNK "hunks\StartupCrashTHWO.ini"
+StartupCrashTSWO HUNK "hunks\StartupCrashTSWO.ini"
+FilenameTHWO HUNK "hunks\FilenameTHWO.ini"
+
