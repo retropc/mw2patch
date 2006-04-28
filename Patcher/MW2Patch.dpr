@@ -1,6 +1,7 @@
 program MW2Patch;
 
 {$R 'fixed.res' 'fixed.rc'}
+{$R 'Icon.res' 'Icon.rc'}
 
 uses
   Classes,
@@ -11,6 +12,8 @@ uses
   Text,
   Hunks,
   Registry,
+  FileCtrl2,
+  ShellAPI,
   ChecksumStream;
 
 var
@@ -294,6 +297,18 @@ begin
   raise Exception.Create('Unable to locate internal hunk: ' + AName);
 end;
 
+function IsWindows2000: boolean;
+var
+  ssOSVersionInfo: TOSVersionInfo;
+begin
+  Result := false;
+  ssOSVersionInfo.dwOSVersionInfoSize := sizeof(ssOSVersionInfo);
+  if GetVersionEx(ssOSVersionInfo) then
+    with ssOSVersionInfo do
+      if (dwMajorVersion = 5) and (dwMinorVersion = 0) then
+        Result := true;
+end;
+
 var
   pFiles: TFileList;
   fCompleted: boolean;
@@ -308,6 +323,7 @@ var
   strData: string;
   ssHunk: THunk;
   iPosition: integer;
+  fRepeating: boolean;
 begin
   pFiles := nil;
   fCompleted := false;
@@ -316,8 +332,25 @@ begin
   SetDirectory();
 
   try
-    iGameVersion := DetermineVersion(pChecksumList);
-
+    fRepeating := false;
+    repeat
+      iGameVersion := DetermineVersion(pChecksumList);
+      if length(pChecksumList) = 0 then
+      begin
+        if not fRepeating then
+        begin
+          if not SelectDirectory(0, 'Please select your MechWarrior 2 directory:', '', strDirectory) then
+            exit;
+          strDirectory := strDirectory + '\';
+          ChDir(strDirectory);
+          fRepeating := true;
+        end
+        else
+          raise Exception.Create('Unable to locate any MechWarrior 2 files.');
+      end
+      else
+        break;
+    until not fRepeating;
     if iGameVersion = 0 then
     begin
       MessageBox(
@@ -447,6 +480,16 @@ begin
     on E: Exception do
       MessageBox(E.Message, [mtCritical]);
   end;
+
   if fCompleted then
-    MessageBox('Patch complete!', [mtInformation, mtOK]);
+  begin
+    strData := '';
+    if IsWindows2000 then
+      strData := CRLF + CRLF + 'Note with Windows 2000 you must have at least Service Pack 2 installed, a web page with instructions will open when you click ok.';
+
+    MessageBox('Patch complete!' + strData, [mtInformation, mtOK]);
+
+    if IsWindows2000 then
+      ShellExecute(0, 'open', 'http://support.microsoft.com/default.aspx?scid=kb;en-us;279792', '', '', SW_SHOW);
+  end;
 end.
