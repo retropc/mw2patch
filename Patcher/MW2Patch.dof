@@ -100,7 +100,7 @@ Conditionals=SMALLEST_CODE
 DebugSourceDirs=..\Lib\
 UsePackages=0
 [Parameters]
-RunParams=
+RunParams=f:\games\mercs-sw
 HostApplication=C:\Documents and Settings\Chris\Desktop\daakumataa\daakumataa.exe
 Launcher=
 UseLauncher=0
