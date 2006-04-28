@@ -15,6 +15,7 @@ const
 const
   Disclaimer =
     'This program will patch MechWarrior 2 for usage under Windows 2000/XP.' + CRLF +
+    'Copyright (C) 2006 Chris Porter -- http://www.warp13.co.uk/' +  CRLF +
     '' + CRLF +
     '%VERSION%.' + CRLF +
     '' + CRLF +
