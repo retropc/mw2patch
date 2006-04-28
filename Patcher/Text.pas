@@ -14,7 +14,7 @@ const
 
 const
   Disclaimer =
-    'This program will patch MechWarrior 2 for usage under Windows XP.' + CRLF +
+    'This program will patch MechWarrior 2 for usage under Windows 2000/XP.' + CRLF +
     '' + CRLF +
     '%VERSION%.' + CRLF +
     '' + CRLF +
